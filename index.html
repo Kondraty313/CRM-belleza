@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRM Belleza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf5f6;--ink:#2a1830;--muted:#7d6a82;--line:#eadde0;--panel:#2a1830;--panel-ink:#fbeef0;--accent:#e8a0ae;--btn:#2a1830;--btn-ink:#ffffff;--field:#ffffff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150e18;--ink:#f4e8ec;--muted:#a891ae;--line:#2e2133;--panel:#26172c;--btn:#e8a0ae;--btn-ink:#2a1830;--field:#1e1423}}
+:root[data-theme="dark"]{--bg:#150e18;--ink:#f4e8ec;--muted:#a891ae;--line:#2e2133;--panel:#26172c;--btn:#e8a0ae;--btn-ink:#2a1830;--field:#1e1423}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Jost,system-ui,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 18px 64px}
+h1,h2{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;margin:0;line-height:1.1}
+h1{font-size:clamp(38px,8vw,60px);letter-spacing:-.01em}
+.sub{color:var(--muted);margin:10px 0 0;max-width:46ch}
+.sum{margin:22px 0 18px;font-size:17px}
+.sum b{font-family:'Bodoni Moda',Georgia,serif;font-size:26px;font-weight:700}
+.panel{background:var(--panel);color:var(--panel-ink);border-radius:26px 26px 26px 6px;padding:26px 24px 12px}
+.panel h2{font-size:26px;margin-bottom:6px}
+.panel .hint{margin:0 0 18px;opacity:.75;font-size:14px}
+.g{margin:0 0 22px}
+.g .gh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:500;font-size:17px}
+.tag{font-size:12px;font-weight:600;background:var(--accent);color:#2a1830;padding:2px 10px;border-radius:99px}
+.tag.alt{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.track{height:12px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;margin:8px 0 6px}
+.track i{display:block;height:100%;background:var(--accent);border-radius:99px;opacity:.5}
+.g.top .track i{opacity:1}
+.gn{font-size:14px;opacity:.8}
+.gn b{font-size:15px}
+.empty{padding:6px 0 18px;opacity:.85}
+h2.sec{font-size:28px;margin:44px 0 14px}
+.add{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;align-items:end}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:10px;padding:11px 18px;background:var(--btn);color:var(--btn-ink)}
+button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tools{display:flex;gap:10px;margin:18px 0 6px;flex-wrap:wrap}
+.tools input{flex:1;min-width:180px}
+ul{list-style:none;margin:0;padding:0}
+.row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.av{width:42px;height:42px;border-radius:50%;background:var(--panel);color:var(--panel-ink);display:grid;place-items:center;font:700 15px 'Bodoni Moda',Georgia,serif;flex:none}
+.who{flex:1;min-width:160px}
+.who b{display:block;font-weight:600}
+.who span{font-size:14px;color:var(--muted)}
+.row select{width:auto;min-width:130px}
+.x{background:transparent;color:var(--muted);padding:8px 10px;border:1px solid var(--line)}
+.won select{border-color:var(--accent)}
+[hidden]{display:none!important}
+.login{max-width:380px;margin:10vh auto 0}
+.login h1{margin-bottom:8px}
+.login .f{margin:16px 0 0}
+.login button{width:100%;margin-top:6px}
+.err{color:#c0392b;margin:12px 0 10px;min-height:1.5em;font-size:15px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 22px}
+.top .sub{margin:0}
+.ov{position:fixed;inset:0;background:rgba(20,10,24,.65);display:grid;place-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px));z-index:50}
+.modal{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:20px;max-width:420px;width:100%;padding:24px}
+.modal h2{font-size:24px;margin-bottom:8px}
+.modal p{color:var(--muted);margin:0 0 16px}
+.modal .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+button.danger{background:#b3261e;color:#fff}
+button.danger:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section id="login" class="login" hidden>
+    <h1>Entrar</h1>
+    <p class="sub">Usa el correo y la contraseña de tu negocio.</p>
+    <div class="f"><label for="em">Correo</label><input id="em" type="email" autocomplete="username"></div>
+    <div class="f"><label for="pw">Contraseña</label><input id="pw" type="password" autocomplete="current-password"></div>
+    <p class="err" id="lerr" role="alert"></p>
+    <button id="go" type="button">Entrar</button>
+  </section>
+  <div id="app" hidden>
+  <div class="top"><span class="sub" id="who"></span><button class="ghost" id="out" type="button">Cerrar sesión</button></div>
+  <h1>Contactos</h1>
+  <p class="sub">Cada contacto con su origen, para ver qué grupo vende de verdad.</p>
+  <p class="sum" id="sum"></p>
+  <p class="sub" id="st" style="margin:-8px 0 18px"></p>
+
+  <section class="panel">
+    <h2>Qué grupo trae más contactos</h2>
+    <p class="hint">Ordenado de mayor a menor. Se actualiza cada vez que guardas o cambias un contacto.</p>
+    <div id="rank"></div>
+  </section>
+
+  <h2 class="sec">Agregar contacto</h2>
+  <div class="add">
+    <div><label for="n">Nombre</label><input id="n" placeholder="Nombre y apellido" autocomplete="off"></div>
+    <div><label for="p">Teléfono</label><input id="p" inputmode="tel" placeholder="099 000 0000" autocomplete="off"></div>
+    <div><label for="s">Grupo de origen</label><input id="s" list="sl" placeholder="Instagram, mujeres 25 a 34" autocomplete="off"><datalist id="sl"></datalist></div>
+    <button id="add" type="button">Guardar contacto</button>
+  </div>
+
+  <h2 class="sec">Lista de contactos</h2>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Buscar por nombre o grupo" aria-label="Buscar">
+    <button class="ghost" id="clr" type="button">Vaciar todo</button>
+  </div>
+  <ul id="list"></ul>
+  </div>
+</div>
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mt" hidden>
+  <div class="modal">
+    <h2 id="mt">Vaciar todos los contactos</h2>
+    <p>Se borrarán todos los contactos de tu negocio y no se puede deshacer. Para continuar, escribe <b>ELIMINAR</b>.</p>
+    <input id="cf" autocomplete="off" aria-label="Escribe ELIMINAR para confirmar" placeholder="ELIMINAR">
+    <div class="acts">
+      <button class="ghost" id="no" type="button">Cancelar</button>
+      <button class="danger" id="ok" type="button" disabled>Eliminar todo</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.93.0"></script>
+<script>
+// CONFIGURACIÓN: datos de tu proyecto en Supabase (la clave publishable es pública, la secreta nunca va aquí)
+var SUPABASE_URL='https://jbhrfshhbbzyntekwius.supabase.co';
+var SUPABASE_KEY='sb_publishable_xYNaVum24eZg538TAdvHlg_Ak8KqJIk';
+
+var ST=['Nuevo','Contactado','Cotizado','Cerrado'],contacts=[],armed=false;
+var sb=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+function $(id){return document.getElementById(id)}
+function show(inApp){$('login').hidden=inApp;$('app').hidden=!inApp}
+function status(t,bad){var e=$('st');e.textContent=t;e.style.color=bad?'#c0392b':''}
+// La librería devuelve {data, error}; esta función convierte el error en una excepción para manejarlo en un solo lugar
+function run(p){return p.then(function(r){if(r.error)throw r.error;return r.data})}
+function fail(e){
+  var m=e&&e.message?e.message:String(e);
+  if(m.indexOf('negocio_id')>-1)m='tu usuario todavía no está vinculado a un negocio (revisa la tabla miembros)';
+  status('Algo falló: '+m,true);
+}
+function enter(session){
+  show(true);$('who').textContent=session.user.email;status('Cargando…');load();
+  run(sb.from('negocios').select('nombre').limit(1)).then(function(d){
+    if(d&&d[0])$('who').textContent=d[0].nombre+', '+session.user.email;
+  }).catch(function(){});
+}
+function load(){
+  return run(sb.from('contactos').select('*').order('creado_en',{ascending:false})).then(function(rows){
+    contacts=rows.map(function(r){return{id:r.id,name:r.nombre,phone:r.telefono||'',source:r.grupo||'Sin origen',stage:r.etapa}});
+    status('Conectado. Solo ves los contactos de tu negocio.');render();
+  }).catch(function(e){fail(e);render()});
+}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function stats(){var m={};contacts.forEach(function(c){var g=m[c.source]||(m[c.source]={name:c.source,leads:0,won:0});g.leads++;if(c.stage==='Cerrado')g.won++});return Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.leads-a.leads})}
+function render(){
+  var g=stats(),total=contacts.length,won=contacts.filter(function(c){return c.stage==='Cerrado'}).length;
+  $('sum').innerHTML=total?'<b>'+total+'</b> contactos, <b>'+won+'</b> ventas, <b>'+Math.round(won/total*100)+'%</b> de cierre':'Todavía no hay contactos.';
+  var max=g.length?g[0].leads:1,best=g.filter(function(x){return x.leads>=2}).sort(function(a,b){return b.won/b.leads-a.won/a.leads})[0];
+  $('rank').innerHTML=g.length?g.map(function(x,i){
+    var pct=Math.round(x.won/x.leads*100);
+    return '<div class="g'+(i===0?' top':'')+'"><div class="gh"><span>'+esc(x.name)+'</span>'+(i===0?'<span class="tag">Más contactos</span>':'')+(best===x?'<span class="tag alt">Mejor cierre</span>':'')+'</div><div class="track"><i style="width:'+(x.leads/max*100)+'%"></i></div><div class="gn"><b>'+x.leads+'</b> contactos, '+x.won+' ventas, '+pct+'% de cierre</div></div>';
+  }).join(''):'<p class="empty">Aún no hay contactos. Agrega el primero más abajo.</p>';
+  $('sl').innerHTML=g.map(function(x){return '<option value="'+esc(x.name)+'">'}).join('');
+  var q=$('q').value.toLowerCase().trim();
+  var rows=contacts.filter(function(c){return !q||(c.name+' '+c.source).toLowerCase().indexOf(q)>-1});
+  $('list').innerHTML=rows.length?rows.map(function(c){
+    var ini=c.name.split(/\s+/).slice(0,2).map(function(w){return w.charAt(0).toUpperCase()}).join('');
+    return '<li class="row'+(c.stage==='Cerrado'?' won':'')+'"><div class="av">'+esc(ini)+'</div><div class="who"><b>'+esc(c.name)+'</b><span>'+esc(c.source)+(c.phone?', '+esc(c.phone):'')+'</span></div><select data-id="'+c.id+'" aria-label="Etapa de '+esc(c.name)+'">'+ST.map(function(s){return '<option'+(s===c.stage?' selected':'')+'>'+s+'</option>'}).join('')+'</select><button class="x" data-del="'+c.id+'" aria-label="Eliminar a '+esc(c.name)+'" type="button">Eliminar</button></li>';
+  }).join(''):'<li class="row"><span class="who"><span>'+(total?'Ningún contacto coincide con la búsqueda.':'Tu lista está vacía.')+'</span></span></li>';
+}
+// Inicio y cierre de sesión
+$('go').onclick=function(){
+  if(!sb)return;
+  var em=$('em').value.trim(),pw=$('pw').value;$('lerr').textContent='';
+  if(!em||!pw){$('lerr').textContent='Escribe tu correo y tu contraseña.';return}
+  sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){
+    if(r.error){$('lerr').textContent=r.error.message.indexOf('Invalid login')>-1?'Correo o contraseña incorrectos.':r.error.message;return}
+    $('pw').value='';enter(r.data.session);
+  });
+};
+$('pw').onkeydown=function(e){if(e.key==='Enter')$('go').click()};
+$('out').onclick=function(){sb.auth.signOut().then(function(){contacts=[];render();show(false)})};
+// Acciones sobre contactos (el negocio se asigna solo en la base de datos)
+$('add').onclick=function(){
+  var n=$('n'),p=$('p'),s=$('s');
+  if(!n.value.trim()){n.focus();return}
+  run(sb.from('contactos').insert({nombre:n.value.trim(),telefono:p.value.trim(),grupo:s.value.trim()||'Sin origen',etapa:'Nuevo'})).then(function(){n.value='';p.value='';n.focus();return load()}).catch(fail);
+};
+$('q').oninput=render;
+$('list').addEventListener('change',function(e){
+  var id=e.target.getAttribute('data-id');if(!id)return;
+  run(sb.from('contactos').update({etapa:e.target.value}).eq('id',id)).then(load).catch(fail);
+});
+$('list').addEventListener('click',function(e){
+  var id=e.target.getAttribute('data-del');if(!id)return;
+  run(sb.from('contactos').delete().eq('id',id)).then(load).catch(fail);
+});
+// Vaciar todo: exige escribir ELIMINAR en una ventana emergente
+var ov=$('ov'),cf=$('cf'),ok=$('ok');
+function openDel(){cf.value='';ok.disabled=true;ov.hidden=false;cf.focus()}
+function closeDel(){ov.hidden=true}
+$('clr').onclick=openDel;
+$('no').onclick=closeDel;
+ov.onclick=function(e){if(e.target===ov)closeDel()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)closeDel()});
+cf.oninput=function(){ok.disabled=cf.value.trim()!=='ELIMINAR'};
+cf.onkeydown=function(e){if(e.key==='Enter'&&!ok.disabled)ok.click()};
+ok.onclick=function(){
+  if(cf.value.trim()!=='ELIMINAR')return;
+  ok.disabled=true;
+  run(sb.from('contactos').delete().gt('id',0)).then(function(){closeDel();return load()}).catch(function(e){closeDel();fail(e)});
+};
+// Arranque: si ya hay una sesión guardada, entra directo
+if(!sb){show(false);$('lerr').textContent='No se pudo cargar la librería de Supabase. Revisa tu conexión a internet.'}
+else sb.auth.getSession().then(function(r){if(r.data&&r.data.session)enter(r.data.session);else show(false)});
+</script>
+</body>
+</html>
